@@ -84,7 +84,11 @@ function draw() {
     textSize(30);
     noStroke();
     text(current_state, 700, 50);
-    if (current_state === AND || current_state === OR || current_state === OR) {
+    if (
+      current_state === AND ||
+      current_state === OR ||
+      current_state === NOT
+    ) {
       onNeuron.show();
       offNeuron.show();
       fill(50, 150);
