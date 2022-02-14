@@ -1,6 +1,7 @@
 class AndLogic {
   constructor(logicType) {
     this.perceptron = new Perceptron(2, 1, 0);
+    this.logicType = logicType;
     if (logicType == "and") {
       this.inputData = [
         [0, 1],
@@ -36,6 +37,40 @@ class AndLogic {
     this.input2.show();
     this.hiddenNeuron.show();
     this.outputNeuron.show();
+    this.drawRect("Class Values", 100, 500, color(0));
+    this.drawRect("Trained  Values", 250, 500, color(0));
+    let temp = this.logicType === "and" ? 0.5 : 1;
+    this.drawRect("w0=" + temp, 100, 540, color(0, 100));
+    this.drawRect(
+      "w0=" + this.roundValue(this.perceptron.weights[0]),
+      250,
+      540,
+      color(0, 100)
+    );
+    this.drawRect("w1=" + temp, 100, 580, color(0, 100));
+    this.drawRect(
+      "w1=" + this.roundValue(this.perceptron.weights[1]),
+      250,
+      580,
+      color(0, 100)
+    );
+    this.drawRect("w2=" + -1, 100, 620, color(0, 100));
+    this.drawRect(
+      "w2=" + this.roundValue(this.perceptron.weights[2]),
+      250,
+      620,
+      color(0, 100)
+    );
+  }
+  roundValue(val) {
+    //round float value to 3 decimal places
+    return Math.round((val + Number.EPSILON) * 1000) / 1000;
+  }
+  drawRect(val, x, y, col) {
+    textSize(20);
+    fill(col);
+    noStroke();
+    text(val, x, y);
   }
   update(mx, my) {
     if (this.input1.isMouseOver(mx, my)) {
