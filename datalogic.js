@@ -31,9 +31,10 @@ class DataLogic {
       1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2,
     ];
     this.perceptron = new Perceptron(2, 1, 0);
-    this.xRange = [0, 0];
-    this.yRange = [0, 0];
-    for (let input of this.inputData) {
+    this.xRange = [this.inputData[0][0], this.inputData[0][0]];
+    this.yRange = [this.inputData[0][1], this.inputData[0][1]];
+    for (let i = 1; i < this.inputData.length; i++) {
+      let input = this.inputData[i];
       let [x, y] = input;
       if (x >= this.xRange[1]) {
         this.xRange[1] = x;
@@ -98,14 +99,19 @@ class DataLogic {
     let x2 = 1;
     let y1 = this.getY(x1);
     let y2 = this.getY(x2);
+    //console.log(y1, y2);
     strokeWeight(4);
     stroke(0, 50);
     let px1 = this.mapX(x1);
     let px2 = this.mapX(x2);
-    let py1 = map(y1, 0, 1, height - 50, 50);
-    let py2 = map(y2, 0, 1, height - 50, 50);
+    let py1 = map(y1, g0, 1, height, 0);
+    let py2 = map(y2, 0, 1, height, 0);
     line(px1, py1, px2, py2);
     this.perceptron.train(this.inputData, this.outputData, 1);
+    fill(0);
+    noStroke();
+    textSize(30);
+    text("Avg Error:" + this.perceptron.error, 20, 750);
   }
   predict(x, y) {
     x = map(x, this.xRange[0], this.xRange[1], 0, 1);

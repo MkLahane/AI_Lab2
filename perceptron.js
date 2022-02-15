@@ -7,6 +7,7 @@ class Perceptron {
     this.label1 = label1;
     this.label2 = label2;
     this.lr = 0.01;
+    this.error = 0;
   }
   getOutput(input) {
     let dotProduct = 0;
@@ -38,6 +39,7 @@ class Perceptron {
         this.updateWeights(error, [...input, 1]);
         avgError += error;
       }
+      this.error = avgError / inputs.length;
       //console.log("Epoch:", epoch, " Avg error:", avgError / inputs.length);
     }
   }
