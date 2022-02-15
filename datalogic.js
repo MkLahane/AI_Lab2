@@ -104,7 +104,7 @@ class DataLogic {
     stroke(0, 50);
     let px1 = this.mapX(x1);
     let px2 = this.mapX(x2);
-    let py1 = map(y1, g0, 1, height, 0);
+    let py1 = map(y1, 0, 1, height, 0);
     let py2 = map(y2, 0, 1, height, 0);
     line(px1, py1, px2, py2);
     this.perceptron.train(this.inputData, this.outputData, 1);
